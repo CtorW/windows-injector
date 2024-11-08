@@ -20,24 +20,7 @@ foreach ($URL in $URLs | Sort-Object { Get-Random }) {
     }
 }
 
-if ($null -eq $response) {
-    Write-Warning "Failed to retrieve MAS from any of the available repositories, aborting!`n`nHelp - https://massgrave.dev/troubleshoot"
-    return
-}
 
-# Verify script integrity
-$releaseHash = '39961D29B07D59D54A709AA7B152269ADC6349752660A0C66D627B09DF18B9B6'
-$stream = New-Object IO.MemoryStream
-$writer = New-Object IO.StreamWriter $stream
-$writer.Write($response)
-$writer.Flush()
-$stream.Position = 0
-$hash = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($stream)) -replace '-'
-if ($hash -ne $releaseHash) {
-    Write-Warning "Hash ($hash) mismatch, aborting!`nReport this issue at https://massgrave.dev/troubleshoot"
-    $response = $null
-    return
-}
 # Check for AutoRun registry which may create issues with CMD
 $paths = "HKCU:\SOFTWARE\Microsoft\Command Processor", "HKLM:\SOFTWARE\Microsoft\Command Processor"
 foreach ($path in $paths) { 
